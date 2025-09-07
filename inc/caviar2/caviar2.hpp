@@ -1,14 +1,14 @@
 /*
  * -----------------------------------------------------------------------------
  * CAVIAR2 - C++ Library
- * 
+ *
  * Copyright (c) 2025 Morad Biagooi and Ehsan Nedaaee Oskoee
  * All rights reserved.
- * 
- * This software is provided "as is", without warranty of any kind.
- * You may use, copy, modify, and distribute this software for any purpose,
- * provided this copyright notice is retained.
- * 
+ *
+ * License: To be determined.
+ * This file is provided "as is", without warranty of any kind.
+ * You may not distribute this code until a license is finalized.
+ *
  * -----------------------------------------------------------------------------
  */
 
@@ -16,15 +16,17 @@
 
 #include <string>
 
-namespace caviar2 {
+namespace caviar2
+{
 
-/**
- * @brief A sample class for caviar2 library.
- * 
- * This class demonstrates a basic interface.
- */
-class Caviar2 {
-public:
+  /**
+   * @brief A sample class for caviar2 library.
+   *
+   * This class demonstrates a basic interface.
+   */
+  class Caviar2
+  {
+  public:
     Caviar2();
     ~Caviar2();
 
@@ -39,11 +41,11 @@ public:
      * @param input An input string.
      * @return Result string after processing.
      */
-    std::string process(const std::string& input) const;
+    std::string process(const std::string &input) const;
 
-private:
+  private:
     // Private implementation details (PIMPL or just members)
     int internal_state_;
-};
+  };
 
 } // namespace caviar2

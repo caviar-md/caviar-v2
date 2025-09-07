@@ -5,9 +5,9 @@
  * Copyright (c) 2025 Morad Biagooi and Ehsan Nedaaee Oskoee
  * All rights reserved.
  * 
- * This software is provided "as is", without warranty of any kind.
- * You may use, copy, modify, and distribute this software for any purpose,
- * provided this copyright notice is retained.
+ * License: To be determined.
+ * This file is provided "as is", without warranty of any kind.
+ * You may not distribute this code until a license is finalized.
  * 
  * -----------------------------------------------------------------------------
  */

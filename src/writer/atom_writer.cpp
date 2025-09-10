@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/atom_data.hpp"
+#include "caviar2/writer/atom_writer.hpp"
 #include "caviar2/atom_data.hpp"
 
 #include "caviar2/time_utility.hpp"
@@ -30,7 +30,7 @@ namespace caviar2
   namespace writer
   {
 
-    Atom_data::Atom_data(Caviar2 *fptr) : Writer{fptr}
+    Atom_writer::Atom_writer(Caviar2 *fptr) : Writer{fptr}
     {
 
       wallTimeXyzDump1 = get_wall_time();
@@ -38,7 +38,7 @@ namespace caviar2
       set_caviar(fptr);
     }
 
-    Atom_data::~Atom_data()
+    Atom_writer::~Atom_writer()
     {
       if (ofs_xyz.is_open())
         ofs_xyz.close();
@@ -89,13 +89,13 @@ namespace caviar2
         ofs_volume_mpi.close();
     }
 
-    void Atom_data::set_caviar(caviar2::Caviar2 *c)
+    void Atom_writer::set_caviar(caviar2::Caviar2 *c)
     {
       caviar_ = c;
       atom_data = &(c->atom_data);
     }
     /*
-      bool Atom_data::read(caviar2::interpreter::Parser *parser)
+      bool Atom_writer::read(caviar2::interpreter::Parser *parser)
       {
         FC_OBJECT_READ_INFO
         bool in_file = true;
@@ -339,7 +339,7 @@ namespace caviar2
         return in_file;
       }
     */
-    void Atom_data::initialize()
+    void Atom_writer::initialize()
     {
       initialized = true;
 
@@ -510,11 +510,11 @@ namespace caviar2
 #endif
     }
 
-    void Atom_data::open_files() {}
-    void Atom_data::close_files() {}
-    void Atom_data::generate() {}
+    void Atom_writer::open_files() {}
+    void Atom_writer::close_files() {}
+    void Atom_writer::generate() {}
 
-    void Atom_data::report_xyz_dump(int64_t i, double)
+    void Atom_writer::report_xyz_dump(int64_t i, double)
     {
 
       // if (my_mpi_rank != 0)
@@ -531,7 +531,7 @@ namespace caviar2
       wallTimeXyzDump1 = wallTimeXyzDump2;
     }
 
-    void Atom_data::write(int64_t i, double t)
+    void Atom_writer::write(int64_t i, double t)
     {
 
       if (!initialized)
@@ -560,7 +560,7 @@ namespace caviar2
         report_xyz_dump(i, t);
     }
 
-    void Atom_data::write_mpi(int64_t i, double t)
+    void Atom_writer::write_mpi(int64_t i, double t)
     {
       if (output_xyz)
         if (i % xyz_step == 0)
@@ -599,7 +599,7 @@ namespace caviar2
     }
 
     // All MPI processes work on this but only rank0 outputs to a file
-    void Atom_data::write_mpi_shared_atoms(int64_t i, double t)
+    void Atom_writer::write_mpi_shared_atoms(int64_t i, double t)
     {
       if (output_xyz && xyz_mpi_rank0)
         if (i % xyz_step == 0)
@@ -638,7 +638,7 @@ namespace caviar2
     }
 
     // All MPI processes work on this but only rank0 outputs to a file
-    void Atom_data::write_mpi_per_process(int64_t i, double t)
+    void Atom_writer::write_mpi_per_process(int64_t i, double t)
     {
       if (output_xyz && xyz_mpi_per_process)
         if (i % xyz_step == 0)
@@ -676,7 +676,7 @@ namespace caviar2
           dump_volume_mpi_per_process(i, t);
     }
 
-    void Atom_data::write_serial(int64_t i, double t)
+    void Atom_writer::write_serial(int64_t i, double t)
     {
       if (output_xyz)
         if (i % xyz_step == 0)
@@ -714,8 +714,8 @@ namespace caviar2
           dump_volume_serial(i, t);
     }
 
-    void Atom_data::start_new_files() {}              // add_time_to_previous
-    void Atom_data::start_new_files(std::string &) {} // add_time_to_previous
+    void Atom_writer::start_new_files() {}              // add_time_to_previous
+    void Atom_writer::start_new_files(std::string &) {} // add_time_to_previous
 
   } // Atom_data
 

@@ -14,7 +14,7 @@
 
 #include "caviar2/caviar2.hpp"
 #include "caviar2/tools/all.hpp"
-#include "caviar2/writer/atom_data.hpp"
+#include "caviar2/writer/atom_writer.hpp"
 
 #include <iostream>
 
@@ -74,7 +74,7 @@ int main()
   caviar.add_force_field(&lj);
 
   // #====== writer
-  writer::Atom_data w1(&caviar);
+  writer::Atom_writer w1(&caviar);
   w1.output_xyz = true;
   w1.xyz_step = 200;
   w1.xyz_mpi_rank0 = 1;

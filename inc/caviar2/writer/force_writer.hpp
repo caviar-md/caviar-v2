@@ -26,12 +26,12 @@ namespace writer
      *
      *
      */
-    class Force_field : public Writer
+    class Force_writer : public Writer
     {
     public:
-        Force_field(class Caviar2* caviar);
-        Force_field();
-        ~Force_field();
+        Force_writer(class Caviar2* caviar);
+        Force_writer();
+        ~Force_writer();
         
         void initialize();
         void write();

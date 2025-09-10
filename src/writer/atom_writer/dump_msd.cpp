@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/atom_data.hpp"
+#include "caviar2/writer/atom_writer.hpp"
 #include "caviar2/atom_data.hpp"
 #include "caviar2/domain.hpp"
 #include "caviar2/caviar2.hpp"
@@ -22,22 +22,22 @@ namespace caviar2 {
 
 namespace writer
 {
-  void Atom_data::dump_msd_mpi(int64_t , double )
+  void Atom_writer::dump_msd_mpi(int64_t , double )
   {
 
   }
 
-  void Atom_data::dump_msd_mpi_per_process(int64_t , double )
+  void Atom_writer::dump_msd_mpi_per_process(int64_t , double )
   {
 
   }
   
-  void Atom_data::dump_msd_mpi_shared_atoms(int64_t , double )
+  void Atom_writer::dump_msd_mpi_shared_atoms(int64_t , double )
   {
 
   }
 
-  void Atom_data::dump_msd_serial(int64_t i, double t)
+  void Atom_writer::dump_msd_serial(int64_t i, double t)
   {
 
     const auto &pos = atom_data->atom_struct_owned.position;

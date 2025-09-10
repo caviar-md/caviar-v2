@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/atom_data.hpp"
+#include "caviar2/writer/atom_writer.hpp"
 #include "caviar2/atom_data.hpp"
 
 #include "caviar2/communicator.hpp"
@@ -29,7 +29,7 @@ namespace writer
   //================================================
   //                                              ||
   //================================================
-  void Atom_data::dump_xyz_serial(int64_t, double)
+  void Atom_writer::dump_xyz_serial(int64_t, double)
   {
     
  
@@ -67,7 +67,7 @@ namespace writer
     }
   }
 
-  void Atom_data::dump_xyz_mpi_per_process(int64_t, double)
+  void Atom_writer::dump_xyz_mpi_per_process(int64_t, double)
   {
 
 #if defined(CAVIAR_WITH_MPI)
@@ -120,7 +120,7 @@ namespace writer
   //================================================
   //                                              ||
   //================================================
-  void Atom_data::dump_xyz_ghost_serial(int64_t, double)
+  void Atom_writer::dump_xyz_ghost_serial(int64_t, double)
   {
     auto &pos = atom_data->atom_struct_ghost.position;
     auto &type = atom_data->atom_struct_ghost.type;
@@ -153,7 +153,7 @@ namespace writer
       ofs_xyz_ghost << std::flush;
     }
   }
-  void Atom_data::dump_xyz_ghost_mpi_per_process(int64_t, double)
+  void Atom_writer::dump_xyz_ghost_mpi_per_process(int64_t, double)
   {
     auto &pos = atom_data->atom_struct_ghost.position;
     auto &type = atom_data->atom_struct_ghost.type;

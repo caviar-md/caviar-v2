@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/force_field.hpp"
+#include "caviar2/writer/force_writer.hpp"
 
 // #include <ctime>
 

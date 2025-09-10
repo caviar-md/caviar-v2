@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/atom_data.hpp"
+#include "caviar2/writer/atom_writer.hpp"
 #include "caviar2/atom_data.hpp"
 
 #include "caviar2/communicator.hpp"
@@ -29,7 +29,7 @@ namespace writer
   //================================================
   //                                              ||
   //================================================
-  void Atom_data::dump_xyz_mpi(int64_t, double)
+  void Atom_writer::dump_xyz_mpi(int64_t, double)
   {
 #if defined(CAVIAR_WITH_MPI)
 
@@ -230,7 +230,7 @@ namespace writer
   //                                              ||
   //================================================
 
-  void Atom_data::dump_xyz_ghost_mpi(int64_t, double)
+  void Atom_writer::dump_xyz_ghost_mpi(int64_t, double)
   {
 #if defined(CAVIAR_WITH_MPI)
 

@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/force_field.hpp"
+#include "caviar2/writer/force_writer.hpp"
 
 // #include "caviar2/atom_data.hpp"
 // #include <ctime>
@@ -23,15 +23,15 @@ namespace caviar2
   namespace writer
   {
 
-    Force_field::Force_field(Caviar2 *fptr) : Writer{fptr}
+    Force_writer::Force_writer(Caviar2 *fptr) : Writer{fptr}
     {
     }
 
-    Force_field::~Force_field()
+    Force_writer::~Force_writer()
     {
     }
     /*
-      bool Force_field::read(caviar2::interpreter::Parser *parser)
+      bool Force_writer::read(caviar2::interpreter::Parser *parser)
       {
         FC_OBJECT_READ_INFO
         bool in_file = true;
@@ -51,8 +51,8 @@ namespace caviar2
         return in_file;
       }
     */
-    void Force_field::initialize() {}
-    void Force_field::write()
+    void Force_writer::initialize() {}
+    void Force_writer::write()
     {
       /*std::ofstream ofs ("o_acc");
       const auto &pos = atom_data -> atom_struct_owned.position;
@@ -61,11 +61,11 @@ namespace caviar2
         ofs << i << " " << acc[i].x << "\t" << acc[i].y << "\t" << acc[i].z << "\n" ;
       }*/
     }
-    void Force_field::write(int64_t) {}                 // current time_step
-    void Force_field::write(double) {}                  // current time
-    void Force_field::write(int64_t, double) {}         // time_step and time
-    void Force_field::start_new_files() {}              // add_time_to_previous
-    void Force_field::start_new_files(std::string &) {} // add_time_to_previous
+    void Force_writer::write(int64_t) {}                 // current time_step
+    void Force_writer::write(double) {}                  // current time
+    void Force_writer::write(int64_t, double) {}         // time_step and time
+    void Force_writer::start_new_files() {}              // add_time_to_previous
+    void Force_writer::start_new_files(std::string &) {} // add_time_to_previous
 
   } // Force_field
 

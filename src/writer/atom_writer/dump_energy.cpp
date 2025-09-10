@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/atom_data.hpp"
+#include "caviar2/writer/atom_writer.hpp"
 #include "caviar2/atom_data.hpp"
 
 #include "caviar2/domain.hpp"
@@ -22,14 +22,14 @@ namespace caviar2 {
 namespace writer
 {
 
-  void Atom_data::dump_energy_mpi(int64_t, double)
+  void Atom_writer::dump_energy_mpi(int64_t, double)
   {
     // double k_e = atom_data->kinetic_energy();
 
     // ofs_energy << i << " " << t << " " << k_e << std::endl;
   }
 
-  void Atom_data::dump_energy_mpi_shared_atoms(int64_t i, double t)
+  void Atom_writer::dump_energy_mpi_shared_atoms(int64_t i, double t)
   {
     double k_e = atom_data->kinetic_energy();
 
@@ -39,7 +39,7 @@ namespace writer
     ofs_energy << i << " " << t << " " << k_e << std::endl;
   }
 
-  void Atom_data::dump_energy_serial(int64_t i, double t)
+  void Atom_writer::dump_energy_serial(int64_t i, double t)
   {
 
 #if defined(CAVIAR_WITH_MPI)
@@ -51,7 +51,7 @@ namespace writer
       ofs_energy << i << " " << t << " " << k_e << std::endl;
     }
   }
-  void Atom_data::dump_energy_mpi_per_process(int64_t i , double t)
+  void Atom_writer::dump_energy_mpi_per_process(int64_t i , double t)
   {
 
     if (energy_mpi_per_process)
@@ -63,14 +63,14 @@ namespace writer
 
   }
 
-  void Atom_data::dump_temperature_mpi(int64_t, double)
+  void Atom_writer::dump_temperature_mpi(int64_t, double)
   {
     // double k_e = atom_data->temperature();
 
     // ofs_temperature << i << " " << t << " " << k_e << std::endl;
   }
 
-  void Atom_data::dump_temperature_mpi_shared_atoms(int64_t i, double t)
+  void Atom_writer::dump_temperature_mpi_shared_atoms(int64_t i, double t)
   {
 
     double k_e = atom_data->temperature();
@@ -81,7 +81,7 @@ namespace writer
     ofs_temperature << i << " " << t << " " << k_e << std::endl;
   }
 
-  void Atom_data::dump_temperature_serial(int64_t i, double t)
+  void Atom_writer::dump_temperature_serial(int64_t i, double t)
   {
 
 #if defined(CAVIAR_WITH_MPI)
@@ -93,7 +93,7 @@ namespace writer
       ofs_temperature << i << " " << t << " " << k_e << std::endl;
     }
   }
-  void Atom_data::dump_temperature_mpi_per_process(int64_t i, double t)
+  void Atom_writer::dump_temperature_mpi_per_process(int64_t i, double t)
   {
 
     if (temperature_mpi_per_process)
@@ -105,14 +105,14 @@ namespace writer
 
   }
 
-  void Atom_data::dump_pressure_mpi(int64_t, double)
+  void Atom_writer::dump_pressure_mpi(int64_t, double)
   {
     // double p = atom_data->pressure();
 
     // ofs_pressure << i << " " << t << " " << p << std::endl;
   }
 
-  void Atom_data::dump_pressure_mpi_shared_atoms(int64_t i, double t)
+  void Atom_writer::dump_pressure_mpi_shared_atoms(int64_t i, double t)
   {
 
     double p = atom_data->pressure();
@@ -123,7 +123,7 @@ namespace writer
     ofs_pressure << i << " " << t << " " << p << std::endl;
   }
 
-  void Atom_data::dump_pressure_serial(int64_t i, double t)
+  void Atom_writer::dump_pressure_serial(int64_t i, double t)
   {
 
 #if defined(CAVIAR_WITH_MPI)
@@ -136,7 +136,7 @@ namespace writer
     }
   }
 
-  void Atom_data::dump_pressure_mpi_per_process(int64_t i, double t)
+  void Atom_writer::dump_pressure_mpi_per_process(int64_t i, double t)
   {
 
     if (pressure_mpi_per_process)
@@ -149,14 +149,14 @@ namespace writer
 
   }
 
-  void Atom_data::dump_volume_mpi(int64_t, double)
+  void Atom_writer::dump_volume_mpi(int64_t, double)
   {
     // double p = atom_data->volume();
 
     // ofs_volume << i << " " << t << " " << p << std::endl;
   }
 
-  void Atom_data::dump_volume_mpi_shared_atoms(int64_t i, double t)
+  void Atom_writer::dump_volume_mpi_shared_atoms(int64_t i, double t)
   {
 
 
@@ -168,7 +168,7 @@ namespace writer
     ofs_volume << i << " " << t << " " << v << std::endl;
   }
 
-  void Atom_data::dump_volume_serial(int64_t i, double t)
+  void Atom_writer::dump_volume_serial(int64_t i, double t)
   {
 
 #if defined(CAVIAR_WITH_MPI)
@@ -181,7 +181,7 @@ namespace writer
     }
   }
 
-  void Atom_data::dump_volume_mpi_per_process(int64_t i, double t)
+  void Atom_writer::dump_volume_mpi_per_process(int64_t i, double t)
   {
 
     if (volume_mpi_per_process)

@@ -12,7 +12,7 @@
  * -----------------------------------------------------------------------------
  */
 
-#include "caviar2/writer/atom_data.hpp"
+#include "caviar2/writer/atom_writer.hpp"
 #include "caviar2/atom_data.hpp"
 #include "caviar2/communicator.hpp"
 
@@ -21,21 +21,21 @@ namespace caviar2 {
 
 namespace writer
 {
-  void Atom_data::dump_povray_mpi(int64_t, double)
+  void Atom_writer::dump_povray_mpi(int64_t, double)
   {
 
   }
 
-  void Atom_data::dump_povray_mpi_per_process(int64_t, double)
+  void Atom_writer::dump_povray_mpi_per_process(int64_t, double)
   {
 
   }
-  void Atom_data::dump_povray_mpi_shared_atoms(int64_t, double)
+  void Atom_writer::dump_povray_mpi_shared_atoms(int64_t, double)
   {
     
   }
 
-  void Atom_data::dump_povray_serial(int64_t, double)
+  void Atom_writer::dump_povray_serial(int64_t, double)
   {
     /*
     #ifdef CAVIAR_WITH_MPI

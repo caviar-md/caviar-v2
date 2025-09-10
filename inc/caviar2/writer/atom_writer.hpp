@@ -36,12 +36,12 @@ namespace writer
    *
    *
    */
-  class Atom_data : public Writer
+  class Atom_writer : public Writer
   {
   public:
-    Atom_data(class Caviar2* caviar) ;
-    Atom_data();
-    ~Atom_data();
+    Atom_writer(class Caviar2* caviar) ;
+    Atom_writer();
+    ~Atom_writer();
     
     void initialize();
 

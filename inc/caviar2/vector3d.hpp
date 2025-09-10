@@ -168,17 +168,17 @@ namespace caviar2
 // page 180 of: http://www.openmp.org/mp-documents/OpenMP4.0.0.pdf
 #ifdef CAVIAR_WITH_OPENMP
 
-#pragma omp declare reduction(+ : caviar::Vector3d<int64_t> : omp_out += omp_in)
+#pragma omp declare reduction(+ : caviar2::Vector3d<int64_t> : omp_out += omp_in)
 
-#pragma omp declare reduction(+ : caviar::Vector3d<uint64_t> : omp_out += omp_in)
+#pragma omp declare reduction(+ : caviar2::Vector3d<uint64_t> : omp_out += omp_in)
 
-#pragma omp declare reduction(+ : caviar::Vector3d<int32_t> : omp_out += omp_in)
+#pragma omp declare reduction(+ : caviar2::Vector3d<int32_t> : omp_out += omp_in)
 
-#pragma omp declare reduction(+ : caviar::Vector3d<double> : omp_out += omp_in)
+#pragma omp declare reduction(+ : caviar2::Vector3d<double> : omp_out += omp_in)
 
-#pragma omp declare reduction(+ : caviar::Vector3d<float> : omp_out += omp_in)
+#pragma omp declare reduction(+ : caviar2::Vector3d<float> : omp_out += omp_in)
 
-#pragma omp declare reduction(+ : caviar::Vector3d<uint32_t> : omp_out += omp_in)
+#pragma omp declare reduction(+ : caviar2::Vector3d<uint32_t> : omp_out += omp_in)
 
 #endif
 

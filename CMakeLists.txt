@@ -2,9 +2,8 @@ cmake_minimum_required(VERSION 3.14)
 project(caviar2 LANGUAGES CXX)
 
 # 1. Build the library
-add_library(caviar2
-    src/caviar2.cpp
-)
+file(GLOB_RECURSE SRC_FILES "src/*.cpp")
+add_library(caviar2 ${SRC_FILES})
 
 target_include_directories(caviar2 PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc>

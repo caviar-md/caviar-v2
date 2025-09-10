@@ -14,13 +14,13 @@
 
 #pragma once
 
-#include "caviar2/forcefield.hpp"
+#include "caviar2/force_field.hpp"
 #include <vector>
 
 namespace caviar2
 {
 
-  namespace forcefield
+  namespace force_field
   {
 
     /**
@@ -30,18 +30,14 @@ namespace caviar2
      * options for lambda scaling, intra-molecular interaction filtering, and
      * support for WCA potential.
      */
-    class Lj : public ForceField
+    class Lj : public Force_field
     {
     public:
       /**
        * @brief Constructor.
        * @param c Pointer to the main CAVIAR object.
        */
-      explicit Lj(class Caviar2 *caviar)
-          : ForceField(caviar) // call base class constructor
-      {
-        // Your Lj-specific initialization here (if any)
-      }
+      Lj(class Caviar2 *caviar);
 
       /**
        * @brief Destructor.
@@ -60,7 +56,34 @@ namespace caviar2
        */
       void calculate_acceleration();
 
-    public:
+
+
+
+    // Single-value parameters
+    void set_cutoff(double value);
+    void set_jump_tol(double value);
+
+    // Flags
+    void enable_monitor_jump(bool flag = true);
+    void ignore_intra_molecule_flag(bool flag = true);
+    void enable_wca(bool flag = true);
+    void enable_off_diagonal_vectors(bool flag = true);
+
+    // Array / vector parameters
+    void set_cutoff_list(const std::vector<std::vector<double>>& values);
+    void set_epsilon(const int type1, const int type2, const double value);
+    void set_sigma(const int type1, const int type2, const double value);
+    void set_lambda_s(const std::vector<std::vector<double>>& values);
+    void set_lambda_e(const std::vector<std::vector<double>>& values);
+    void set_epsilon_atom(const int type, const double value);
+    void set_sigma_atom(const int type, const double value);
+
+    // References to other objects
+    void set_neighborlist(class NeighborList* nl);
+    void set_atom_data(class Atom_data* ad);
+    void set_domain(class Domain* dom);
+    
+    private:
       /// Lambda scaling factors for the attractive part of the potential [lambda_e(i,j)].
       std::vector<std::vector<double>> lambda_e;
 
@@ -77,7 +100,7 @@ namespace caviar2
       bool ignore_intra_molecule = false;
 
       /// If true, input parameters are provided as arrays rather than per-atom.
-      bool input_by_array;
+      bool input_by_array = false;
 
       /// Epsilon parameters for each pair of types (depth of potential well).
       std::vector<std::vector<double>> epsilon;
@@ -86,10 +109,10 @@ namespace caviar2
       std::vector<std::vector<double>> sigma;
 
       /// If true, off-diagonal vectors (cross parameters) will be computed.
-      bool make_off_diagonal_vectors;
+      bool make_off_diagonal_vectors = false;
 
       /// If true, input parameters are provided per atom type.
-      bool input_by_atom;
+      bool input_by_atom = false;
 
       /// Epsilon parameters for individual atom types.
       std::vector<double> epsilon_atom;
@@ -98,19 +121,19 @@ namespace caviar2
       std::vector<double> sigma_atom;
 
       /// Debugging flag: enable jump fix algorithm.
-      bool jump_fix;
+      bool jump_fix = false;
 
       /// Debugging flag: monitor jump events.
-      bool monitor_jump;
+      bool monitor_jump = false;
 
       /// Tolerance parameter for jump detection/fix.
-      double jump_tol;
+      double jump_tol = 1e-6;
 
       /// If true, the Weeks-Chandler-Anderson (WCA) potential is activated.
-      bool wca;
+      bool wca = false;
 
       /// If true, cutoff lists are activated for variable cutoff distances.
-      bool cutoff_list_activated;
+      bool cutoff_list_activated = false;
 
       /**
        * @brief List of cutoff distances between particle types.

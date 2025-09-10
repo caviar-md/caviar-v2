@@ -1,0 +1,190 @@
+/*
+ * -----------------------------------------------------------------------------
+ * CAVIAR2 - C++ Library
+ *
+ * Copyright (c) 2025 Morad Biagooi and Ehsan Nedaaee Oskoee
+ * All rights reserved.
+ *
+ * License: To be determined.
+ * This file is provided "as is", without warranty of any kind.
+ * You may not distribute this code until a license is finalized.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+#pragma once
+
+#include "caviar2/vector3d.hpp"
+#include <vector>
+
+namespace caviar2
+{
+
+  class Atom_data;
+
+  /**
+   * This class is the base class for all the neighborlists.
+   * Neighborlists are a way to reduce the order of MD force calculations
+   *
+   * A cell list with an internal verlet list.
+   * to this point, the
+   * cell list usage is in the potential calculation of electrostatic_ewald_r force_field
+   * on the finite_element mesh boundaries,
+   */
+  class Neighborlist
+  {
+  public:
+    Neighborlist(class Caviar2 *caviar);
+    Neighborlist();
+    virtual void set_caviar(Caviar2 *c);
+
+    virtual ~Neighborlist();
+
+    // bool read(class caviar2::interpreter::Parser *);
+
+    virtual void init();
+
+    /**
+     *  if update_neighborlist == true, it makes a new list,
+     *  if not, it checks if a new list is needed, and if the
+     *  result is true, it creates a new list.
+     *  It returns weather or not a new list is created
+     */
+    virtual bool build(bool update_neighborlist);
+
+    /**
+     * Check if the update is needed due to particle movements
+     */
+    virtual bool update_is_needed();
+
+    virtual void update_verlet_list();
+
+    virtual void update_verlet_list_from_cell_list();
+
+    virtual void update_cell_list();
+
+    virtual void calculate_cutoff_extra();
+
+    virtual void all_atom_test_function(int state = 0);
+
+    virtual Vector3d<int> binlist_index(const Vector3d<double> &);
+
+    virtual int neigh_bin_index(const Vector3d<double> &);
+
+    virtual void make_neigh_bin();
+
+    class Domain *domain = nullptr;
+
+    class caviar2::Atom_data *atom_data = nullptr;
+
+    /**
+     * if 'true' one can use this class as a 'verlet_list'.
+     */
+    bool make_verlet_list_from_cell_list = false;
+
+    /**
+     *
+     * Verlet list: the list of the neighbors of each atom
+     */
+    std::vector<std::vector<unsigned int>> neighlist;
+
+    /**
+     * Cell List: The list of particles index in each bin with 3 Index in 3D
+     */
+    std::vector<std::vector<std::vector<std::vector<unsigned int>>>> binlist;
+
+    ///**
+    // * Cell List: The list of particles index in each bin
+    // */
+    // std::vector<std::vector<unsigned int>> binlist_linear;
+
+    /**
+     * Cell List: The 3D index of the neighbors of each bin.
+     */
+    std::vector<std::vector<Vector3d<int>>> neigh_bin;
+
+    ///*
+    // * Cell List: The 3D index of the neighbors of each bin.
+    // */
+    // std::vector<std::vector<unsigned int>> neigh_bin_linear;
+
+    /**
+     * Cell List: Number of bins in each direction
+     */
+    Vector3d<int> no_bins;
+
+    /**
+     * Maximum cutoff of short-ranged force-fields.
+     */
+    double cutoff = 0;
+
+    /**
+     * cutoff_extra = cutoff_extra_coef * cutoff
+     */
+    double cutoff_extra = 0;
+
+    /**
+     * square of rebuild verlet list threshold distance ~ (0.5*(cutoff_extra - cutoff))^2
+     */
+    double threshold_distance_sq;
+
+    /**
+     * default extra coef
+     */
+    double cutoff_extra_coef = 1.12347;
+
+    /**
+     * Timestep, Used in cutoff_extra calculations
+     */
+    double dt;
+
+    /**
+     * MPI rank of the classs
+     */
+    int my_mpi_rank = -1;
+
+  protected:
+    /**
+     *  default type is verlet_list. Celllist is built if reqired by some force_field
+     *  since it is more computational intensive thatn verlet list
+     */
+    double build_cell_list = false;
+
+    /**
+     *  inverse of cutoff. For faster computations
+     */
+    double cutoff_inv;
+
+    /**
+     * position of the ghost particles at the previous verlet list generation step
+     */
+    std::vector<Vector3d<double>> ghost_pos_old;
+
+    /**
+     * position of the particles at the previous verlet list generation step
+     */
+    std::vector<Vector3d<double>> pos_old;
+
+    std::vector<int> mpi_rank_old;
+
+    /**
+     *  if true, all of the atoms will see all of the other atoms
+     *  the result of simulation must be exactly the same as the neighborlist with correct parameters.
+     */
+    bool all_atom_test = false;
+
+    /**
+     *  if true, verlet_list will be made on every timestep
+     *  the result of simulation must be exactly the same as the neighborlist with correct parameters.
+     */
+    bool rebuild_test = false;
+
+    bool initialized = false;
+
+    void verify_settings();
+
+  protected:
+    Caviar2 *caviar_; // non-owning pointer; or use std::weak_ptr if shared ownership
+  };
+
+}

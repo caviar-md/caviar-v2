@@ -1,0 +1,78 @@
+
+//========================================================================
+//
+// Copyright (C) 2019 by Morad Biagooi and Ehsan Nedaaee Oskoee.
+//
+// This file is part of the CAVIAR package.
+//
+// The CAVIAR package is free software; you can use it, redistribute
+// it, and/or modify it under the terms of the GNU Lesser General
+// Public License as published by the Free Software Foundation; either
+// version 3.0 of the License, or (at your option) any later version.
+// The full text of the license can be found in the file LICENSE at
+// the top level of the CAVIAR distribution.
+//
+//========================================================================
+
+#include "caviar2/tools/molecule_list.hpp"
+#include "caviar2/tools/molecule.hpp"
+#include "caviar2/tools/molecule_group.hpp"
+
+namespace caviar2
+{
+
+  namespace tools
+  {
+
+    Molecule_list::Molecule_list(Caviar2 *fptr)
+    {
+    }
+
+    Molecule_list::~Molecule_list()
+    {
+    }
+
+    void Molecule_list::verify_settings()
+    {
+    }
+
+    Molecule_list::Molecule_list(const Molecule_list &a) 
+    {
+    }
+    /*
+      bool Molecule_list::read(caviar2::interpreter::Parser *parser)
+      {
+        FC_OBJECT_READ_INFO
+
+        while (true)
+        {
+          FC_IF_RAW_TOKEN_EOF_EOL
+          FC_OBJECT_READ_INFO_STR
+          if (string_cmp(t, "add_atom"))
+          {
+            FIND_OBJECT_BY_NAME(tools, it)
+            FC_CHECK_OBJECT_CLASS_NAME(tools, it, molecule)
+            auto a = dynamic_cast<tools::Molecule *>(object_container->tools[it->second.index]);
+
+            molecules.push_back(a);
+            continue;
+          }
+          else if (string_cmp(t, "clear"))
+          {
+            molecules.clear();
+            continue;
+          }
+          else
+            FC_ERR_UNDEFINED_VAR(t)
+        }
+
+        return true;
+      }
+    */
+    void Molecule_list::add_molecule(const tools::Molecule &)
+    {
+    }
+
+  } // tools
+
+}

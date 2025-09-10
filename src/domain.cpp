@@ -268,6 +268,30 @@ namespace caviar2
     return in_file;
   }
   */
+
+  void Domain::set_lower_global(const Vector3d<double> &v)
+  {
+    lower_global = v;
+  }
+  void Domain::set_upper_global(const Vector3d<double> &v)
+  {
+    upper_global = v;
+  }
+  void Domain::set_boundary_condition(const Vector3d<int> &v)
+  {
+    boundary_condition = v;
+  }
+  void Domain::print_info()
+  {
+    std::cout << "MPI Rank: " << me
+              << " local.x [" << lower_local.x << " , " << upper_local.x << "]"
+              << " local.y [" << lower_local.y << " , " << upper_local.y << "]"
+              << " local.z [" << lower_local.z << " , " << upper_local.z << "]"
+              << " global.x [" << lower_global.x << " , " << upper_global.x << "]"
+              << " global.y [" << lower_global.y << " , " << upper_global.y << "]"
+              << " global.z [" << lower_global.z << " , " << upper_global.z << "]"
+              << std::endl;
+  }
   void Domain::generate()
   {
 #if defined(CAVIAR_SINGLE_MPI_MD_DOMAIN)

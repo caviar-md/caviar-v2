@@ -52,49 +52,20 @@ namespace caviar2
       velocity = a.velocity;
       type = a.type;
     }
-    /*
-      bool Atom::read(caviar2::interpreter::Parser *parser)
-      {
-        FC_OBJECT_READ_INFO
-        bool in_file = true;
 
-        while (true)
-        {
-          //FC_IF_RAW_TOKEN_EOF_EOL
-          //FC_IF_GET_REAL3D(position)
-          //else FC_IF_GET_REAL3D(velocity) else FC_IF_GET_INT(type) else FC_ERR_UNDEFINED_VAR(ts)
+    void Atom::set_type(size_t t)
+    {
+      type = t;
+    }
+    void Atom::set_position(const Vector3d<double> &v)
+    {
+      position = v;
+    }
+    void Atom::set_velocity(const Vector3d<double> &v)
+    {
+      velocity = v;
+    }
 
-          GET_A_TOKEN_FOR_CREATION
-          auto t = token.string_value;
-          FC_OBJECT_READ_INFO_STR
-          if (string_cmp(t, "position"))
-          {
-            double x = 0,y = 0,z = 0;
-            GET_OR_CHOOSE_A_REAL(x, "", "")
-            GET_OR_CHOOSE_A_REAL(y, "", "")
-            GET_OR_CHOOSE_A_REAL(z, "", "")
-            position = Vector3d<double>{x, y, z};
-          }
-          else if (string_cmp(t, "velocity"))
-          {
-            double x = 0,y = 0,z = 0;
-            GET_OR_CHOOSE_A_REAL(x, "", "")
-            GET_OR_CHOOSE_A_REAL(y, "", "")
-            GET_OR_CHOOSE_A_REAL(z, "", "")
-            velocity = Vector3d<double>{x, y, z};
-          }
-          else if (string_cmp(t, "type"))
-          {
-            GET_OR_CHOOSE_A_INT(type, "", "")
-            //if (type < 0)
-              //caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "type have to be non-negative.");
-          }
-          else
-            FC_ERR_UNDEFINED_VAR(t)
-        }
-        return in_file;
-      }
-    */
     void Atom::extract_all_e_pos_vel(std::vector<int> &e, std::vector<Vector3d<double>> &p,
                                      std::vector<Vector3d<double>> &v)
     {

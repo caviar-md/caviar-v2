@@ -37,7 +37,16 @@ namespace tools
     Atom(const Atom &);
     Atom();
     ~Atom();
-    
+    // ====================
+    // Public API functions
+    // ====================
+    void set_type(size_t type);
+    void set_position(const Vector3d<double> &v);
+    void set_velocity(const Vector3d<double> &v);
+    // ====================
+    //                   ||
+    // ====================
+
     void verify_settings();
     Vector3d<double> pos_tot() const;
     Vector3d<double> vel_tot() const;
@@ -52,7 +61,7 @@ namespace tools
     Atom_group *upper_level_atom_group;
 
     Vector3d<double> position, velocity;
-    unsigned int type;
+    size_t type;
         // FC_BASE_OBJECT_COMMON_TOOLS
     void set_caviar(Caviar2 *c) ;
 

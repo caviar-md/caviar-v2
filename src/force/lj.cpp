@@ -49,12 +49,7 @@ namespace caviar2
           GET_A_TOKEN_FOR_CREATION
           auto t = token.string_value;
           FC_OBJECT_READ_INFO_STR
-          if (string_cmp(t, "cutoff"))
-          {
-            GET_OR_CHOOSE_A_REAL(cutoff, "", "")
-            if (cutoff < 0.0)
-              caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "Force field cutoff have to non-negative.");
-          }
+
           else if (string_cmp(t, "cutoff_list"))
           {
             GET_A_STDVECTOR_STDVECTOR_REAL_ELEMENT(cutoff_list)
@@ -62,79 +57,7 @@ namespace caviar2
             if (vector_value < 0)
               caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "Epsilon have to be non-negative.");
           }
-          else if (string_cmp(t, "epsilon"))
-          {
-            GET_A_STDVECTOR_STDVECTOR_REAL_ELEMENT(epsilon)
-            if (vector_value < 0)
-              caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "Epsilon have to be non-negative.");
-            input_by_array = true;
-          }
-          else if (string_cmp(t, "sigma"))
-          {
-            GET_A_STDVECTOR_STDVECTOR_REAL_ELEMENT(sigma)
-            if (vector_value < 0)
-              caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "Sigma have to be non-negative.");
-            input_by_array = true;
-          }
-          else if (string_cmp(t, "lambda_s"))
-          {
-            GET_A_STDVECTOR_STDVECTOR_REAL_ELEMENT_R(lambda_s, 1.0)
-            if (vector_value < 0)
-              caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "Sigma have to be non-negative.");
-            lambda_s_is_set = true;
-          }
-          else if (string_cmp(t, "lambda_e"))
-          {
-            GET_A_STDVECTOR_STDVECTOR_REAL_ELEMENT_R(lambda_e, 1.0)
-            if (vector_value < 0)
-              caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "Sigma have to be non-negative.");
-            lambda_e_is_set = true;
-          }
-          else if (string_cmp(t, "epsilon_atom"))
-          {
-            GET_A_STDVECTOR_REAL_ELEMENT(epsilon_atom)
-            input_by_atom = true;
-          }
-          else if (string_cmp(t, "sigma_atom"))
-          {
-            GET_A_STDVECTOR_REAL_ELEMENT(sigma_atom)
-            input_by_atom = true;
-          }
-          else if (string_cmp(t, "set_neighborlist") || string_cmp(t, "neighborlist"))
-          {
-            FIND_OBJECT_BY_NAME(neighborlist, it)
-            neighborlist = object_container->neighborlist[it->second.index];
-          }
-          else if (string_cmp(t, "set_atom_data") || string_cmp(t, "atom_data"))
-          {
-            FIND_OBJECT_BY_NAME(atom_data, it)
-            atom_data = object_container->atom_data[it->second.index];
-          }
-          else if (string_cmp(t, "set_domain") || string_cmp(t, "domain"))
-          {
-            FIND_OBJECT_BY_NAME(domain, it)
-            domain = object_container->domain[it->second.index];
-          }
-          else if (string_cmp(t, "jump_tol"))
-          {
-            // can be used only if there's a random force. It should happen  rarely.
-            // it fixes the enormous amount of LJ to a lesser value.
-            jump_fix = true;
-            GET_OR_CHOOSE_A_REAL(jump_tol, "", "")
-          }
-          else if (string_cmp(t, "monitor_jump"))
-          {
-            monitor_jump = true;
-          }
-          else if (string_cmp(t, "ignore_intra_molecule"))
-          {
-            ignore_intra_molecule = true;
-          }
-          else if (string_cmp(t, "wca"))
-          {
-            wca = true;
-            cutoff_list_activated = true;
-          }
+
           else if (string_cmp(t, "make_off_diagonal_vectors"))
           {
             make_off_diagonal_vectors = true;

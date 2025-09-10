@@ -40,8 +40,21 @@ namespace caviar2
 
     virtual ~Neighborlist();
 
-    // bool read(class caviar2::interpreter::Parser *);
+    // ====================
+    // Public API functions
+    // ====================
+    void set_cutoff(double v);
+    void set_cutoff_extra_coef(double v);
+    void set_make_verlet_list_from_cell_list(bool v);
+    void set_build_cell_list(bool v);
 
+    void set_all_atom_test(bool v);
+    void set_rebuild_test(bool v);
+
+    void set_dt(double dt_);
+    // ====================
+    //                   ||
+    // ====================
     virtual void init();
 
     /**

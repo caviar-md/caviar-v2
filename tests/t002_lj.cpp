@@ -32,15 +32,7 @@ int main()
 
   //===== Atom definition =====
 
-  tools::Atom a1(&caviar);
-  a1.set_type(0);
-  a1.set_position(Vector3d<double>{-1, 0, 0});
-
-  tools::Atom a2(&caviar);
-  a2.set_type(0);
-  a2.set_position( Vector3d<double>{1, 0, 0});
-
-  //#===== Domain
+  // #===== Domain
 
   caviar.domain.set_lower_global(Vector3d<double>{-51, -50, -50});
   caviar.domain.set_upper_global(Vector3d<double>{51, 50, 50});
@@ -50,18 +42,31 @@ int main()
   // #========== Atom_data
 
   caviar.atom_data.set_ghost_cutoff(cutoff_max);
-  caviar.atom_data.add_atom(a1);
-  caviar.atom_data.add_atom(a2);
+
+  for (int i = -20; i < 20; i += 5)
+  {
+    for (int j = -20; j < 20; j += 5)
+    {
+      for (int k = -20; k < 20; k += 5)
+      {
+        tools::Atom a1(&caviar);
+        a1.set_type(0);
+        a1.set_position(Vector3d<double>{(double)i, (double)j, (double)k});
+
+        caviar.atom_data.add_atom(a1);
+      }
+    }
+  }
   caviar.atom_data.add_type_mass(0, 1);
   caviar.atom_data.add_type_charge(0, 0);
   caviar.atom_data.set_k_b(1.0);
   caviar.atom_data.set_temperature_process(true);
-
+  caviar.atom_data.add_random_velocity(1, .5);
   // #===== Neighborlist
 
-  caviar.neighborlist.set_cutoff (cutoff_max);
-  caviar.neighborlist.set_cutoff_extra_coef (1.0523);
-  caviar.neighborlist.set_dt (dt_all);
+  caviar.neighborlist.set_cutoff(cutoff_max);
+  caviar.neighborlist.set_cutoff_extra_coef(1.0523);
+  caviar.neighborlist.set_dt(dt_all);
 
   // #===== force_field
 
@@ -74,17 +79,17 @@ int main()
 
   // #====== writer
   writer::Atom_writer w1(&caviar);
-  w1.set_xyz_step( 200);
-  w1.set_xyz_mpi_rank0 (true);
-  w1.set_xyz_mpi_per_process( true);
+  w1.set_xyz_step(500);
+  w1.set_xyz_mpi_rank0(true);
+  w1.set_xyz_mpi_per_process(true);
 
-  w1.set_temperature_step (200);
-  w1.set_temperature_mpi_rank0 (false);
-  w1.set_temperature_mpi_per_process (false);
+  w1.set_temperature_step(500);
+  w1.set_temperature_mpi_rank0(false);
+  w1.set_temperature_mpi_per_process(false);
 
-  w1.set_energy_step (200);
-  w1.set_energy_mpi_rank0 (true);
-  w1.set_energy_mpi_per_process (true);
+  w1.set_energy_step(500);
+  w1.set_energy_mpi_rank0(true);
+  w1.set_energy_mpi_per_process(true);
 
   caviar.add_writer(&w1);
 
@@ -92,7 +97,7 @@ int main()
 
   caviar.md_simulator.set_integrator_type(Integrator_t::Velocity_verlet);
   caviar.md_simulator.set_initial_step(0);
-  caviar.md_simulator.set_final_step(20000);
+  caviar.md_simulator.set_final_step(200000);
   caviar.md_simulator.set_dt(dt_all);
   caviar.md_simulator.run();
 

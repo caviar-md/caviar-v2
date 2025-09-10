@@ -199,67 +199,47 @@ namespace caviar2
     }
   }
 
-  /*
-  bool Neighborlist::read(caviar2::interpreter::Parser *parser)
+  void Neighborlist::set_cutoff(double v)
   {
-    FC_OBJECT_READ_INFO
-    bool in_file = true;
-    while (true)
-    {
-      GET_A_TOKEN_FOR_CREATION
-      auto t = token.string_value;
-      FC_OBJECT_READ_INFO_STR
-      if (string_cmp(t, "set_atom_data") || string_cmp(t, "atom_data"))
-      {
-        FIND_OBJECT_BY_NAME(atom_data, it)
-        atom_data = object_container->atom_data[it->second.index];
-      }
-      else if (string_cmp(t, "cutoff"))
-      {
-        GET_OR_CHOOSE_A_REAL(cutoff, "", "")
-        if (cutoff <= 0.0)
-          caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "cutoff have to non-negative.");
-      }
-      else if (string_cmp(t, "cutoff_extra_coef"))
-      {
-        GET_OR_CHOOSE_A_REAL(cutoff_extra_coef, "", "")
-        if (cutoff_extra_coef < 1.0)
-          caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "cutoff_extra_coef must be larger than 1.0");
-      }
-      else if (string_cmp(t, "make_verlet_list_from_cell_list"))
-      {
-        make_verlet_list_from_cell_list = true;
-        build_cell_list = true;
-      }
-        else if (string_cmp(t, "build_cell_list"))
-      {
-        build_cell_list = true;
-      }
-      else if (string_cmp(t, "set_domain") || string_cmp(t, "domain"))
-      {
-        FIND_OBJECT_BY_NAME(domain, it)
-        domain = object_container->domain[it->second.index];
-      }
-      else if (string_cmp(t, "all_atom_test"))
-      {
-        all_atom_test = true;
-      }
-      else if (string_cmp(t, "rebuild_test"))
-      {
-        rebuild_test = true;
-      }
-      else if (string_cmp(t, "dt"))
-      {
-        GET_OR_CHOOSE_A_REAL(dt, "", "")
-        if (dt < 0.0)
-          caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "dt have to non-negative.");
-      }
-      else
-        caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE, "Unknown variable or command");
-    }
-    return in_file;
+
+    if (v <= 0.0)
+      caviar_->log.error_all(FC_FILE_LINE_FUNC, "cutoff have to non-negative.");
+    else
+      cutoff = v;
   }
-  */
+  void Neighborlist::set_cutoff_extra_coef(double v)
+  {
+
+    if (v < 1.0)
+      caviar_->log.error_all(FC_FILE_LINE_FUNC, "cutoff_extra_coef must be larger than 1.0");
+    else
+      cutoff_extra_coef = v;
+  }
+  void Neighborlist::set_make_verlet_list_from_cell_list(bool v)
+  {
+    make_verlet_list_from_cell_list = v;
+    build_cell_list = v;
+  }
+  void Neighborlist::set_build_cell_list(bool v)
+  {
+    build_cell_list = v;
+  }
+  void Neighborlist::set_all_atom_test(bool v)
+  {
+    all_atom_test = v;
+  }
+  void Neighborlist::set_rebuild_test(bool v)
+  {
+    rebuild_test = v;
+  }
+  void Neighborlist::set_dt(double dt_)
+  {
+
+    if (dt_ < 0.0)
+      caviar_->log.error_all(FC_FILE_LINE_FUNC, "dt have to non-negative.");
+    else
+      dt = dt_;
+  }
   //============================================
   //               Verlet_list functions
   //============================================

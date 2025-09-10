@@ -29,16 +29,23 @@ namespace caviar2
   {
   public:
     Domain();
-    Domain(class Caviar2* caviar) ;
+    Domain(class Caviar2 *caviar);
     virtual ~Domain();
 
-  
-  
-
-    virtual void calculate_local_domain();
+    // ====================
+    // Public API functions
+    // ====================
+    void set_lower_global(const Vector3d<double> &v);
+    void set_upper_global(const Vector3d<double> &v);
+    void set_boundary_condition(const Vector3d<int> &v);
+    void print_info();
     virtual void generate();
-    virtual void calculate_procs_grid();
+    // ====================
+    //                   ||
+    // ====================
 
+    virtual void calculate_local_domain();    
+    virtual void calculate_procs_grid();
     /**
      * It must be called after the changes in the domain
      */

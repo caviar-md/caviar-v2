@@ -56,7 +56,9 @@ namespace caviar2
     Atom_data(class Caviar2 *caviar) ;
     virtual ~Atom_data();
 
-    //===============
+    // ====================
+    // Public API functions
+    // ====================
     void set_ghost_cutoff(double value);
     void set_neighborlist_cutoff(double value);
     void set_cutoff_extra(double value);
@@ -68,26 +70,21 @@ namespace caviar2
     void set_pressure_process(int flag);
     void set_temperature_process(int flag);
 
-    // void add_atom(tools::Atom &a);
-    // void add_atom_group(tools::Atom_group &g);
-    // void add_atom_list(tools::Atom_list &l);
-    // void add_molecule(tools::Molecule &m);
-    // void add_molecule_group(tools::Molecule_group &g);
-    // void add_molecule_list(tools::Molecule_list &l);
-
     void add_type_radius(int type_index, double r);
     void add_type_charge(int type_index, double c);
     void add_type_mass(int type_index, double m);
 
-    void set_owned_position(int index, const Vector3d<double> &v);
-    void set_owned_velocity(int index, const Vector3d<double> &v);
-    void set_owned_acceleration(int index, const Vector3d<double> &v);
+    void set_position(int index, const Vector3d<double> &v);
+    void set_velocity(int index, const Vector3d<double> &v);
+    void set_acceleration(int index, const Vector3d<double> &v);
 
 
     void set_n_r_df(int value);
     void set_velocity_offset(tools::Time_function_3d *f);
 
-    //===============
+    // ====================
+    //                   ||
+    // ====================
 
     /**
      * Used in barostat scaling for geometrical forces.

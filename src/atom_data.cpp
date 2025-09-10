@@ -64,19 +64,7 @@ namespace caviar2
     caviar_ = c;
     domain = &(c->domain);
   }
-  /*
-  #define FIND_UNIQUE_OBJECT_BY_NAME_NIC(OBJECT_TYPE,ITERATOR_NAME) \
-    std::string name_to_find_;\
-    MAKE_ERROR_MASSAGE_EXPECTED(err,OBJECT_TYPE,"name.")\
-    GET_A_STRING(name_to_find_,"", err)\
-    CHECK_NAME_EXISTANCE(name_to_find_, ITERATOR_NAME, "","")\
-    if (ITERATOR_NAME->second.type != caviar2::interpreter::object_handler::gdst( #OBJECT_TYPE ))\
-      caviar_->log.error_all(FC_FILE_LINE_FUNC_PARSE,": undefined object. ");
 
-  #define FIND_UNIQUE_OBJECT_BY_NAME(OBJECT_TYPE,ITERATOR_NAME) \
-    std::map<std::string,caviar2::interpreter::object_handler::Dictionary>::iterator ITERATOR_NAME;\
-    FIND_UNIQUE_OBJECT_BY_NAME_NIC(OBJECT_TYPE,ITERATOR_NAME)
-  */
 
   /*
   bool Atom_data::read(caviar2::interpreter::Parser *parser)
@@ -395,14 +383,14 @@ namespace caviar2
   }
 
   // ====================== Atom properties ======================
-  void Atom_data::set_owned_position(int ind, const Vector3d<double> &v)
+  void Atom_data::set_position(int ind, const Vector3d<double> &v)
   {
     if (ind < 0 || ind >= atom_struct_owned.position.size())
       return;
     atom_struct_owned.position[ind] = v;
   }
 
-  void Atom_data::set_owned_velocity(int ind, const Vector3d<double> &v)
+  void Atom_data::set_velocity(int ind, const Vector3d<double> &v)
   {
 
     if (ind < 0 || ind >= atom_struct_owned.position.size())
@@ -410,7 +398,7 @@ namespace caviar2
     atom_struct_owned.velocity[ind] = v;
   }
 
-  void Atom_data::set_owned_acceleration(int ind, const Vector3d<double> &v)
+  void Atom_data::set_acceleration(int ind, const Vector3d<double> &v)
   {
 
     if (ind < 0 || ind >= atom_struct_owned.position.size())

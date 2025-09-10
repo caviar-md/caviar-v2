@@ -59,6 +59,10 @@ namespace caviar2
 
 
 
+    // ====================
+    // Public API functions
+    // ====================
+
     // Single-value parameters
     void set_cutoff(double value);
     void set_jump_tol(double value);
@@ -77,7 +81,10 @@ namespace caviar2
     void set_lambda_e(const std::vector<std::vector<double>>& values);
     void set_epsilon_atom(const int type, const double value);
     void set_sigma_atom(const int type, const double value);
-
+    // ====================
+    //                   ||
+    // ====================
+    
     // References to other objects
     void set_neighborlist(class NeighborList* nl);
     void set_atom_data(class Atom_data* ad);

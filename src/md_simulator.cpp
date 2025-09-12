@@ -620,7 +620,7 @@ namespace caviar2
     auto &pos = atom_data->atom_struct_owned.position;
     auto &vel = atom_data->atom_struct_owned.velocity;
     auto &acc = atom_data->atom_struct_owned.acceleration;
-    auto &pos_old = atom_data->atom_struct_owned.position;
+    auto &pos_old = atom_data->atom_struct_owned.position_old;
     auto &acc_old = atom_data->atom_struct_owned.acceleration_old; // velocity verlet
     auto psize = pos.size();
     pos_old.resize(psize);
